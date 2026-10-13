@@ -1,0 +1,160 @@
+/* Streamly Academia · ajustes para teléfono.
+   Se importa al final (main.jsx) para ganar en el orden de la cascada sin tocar las hojas compartidas.
+   Criterios: sin scroll horizontal, objetivos táctiles >= 44px, inputs a 16px (iOS no hace zoom),
+   texto >= 12px, modales con dvh y safe-area. */
+
+/* 1. Altura dinámica: 100vh incluye la barra de direcciones en móvil; 100dvh no. */
+@supports (height: 100dvh) {
+  #root, .learning-shell { min-height: 100dvh; }
+  .learn-page { min-height: calc(100dvh - 75px); }
+  .learning-layout { min-height: calc(100dvh - 68px); }
+  .cover-crop-modal, .confirm-dialog { max-height: calc(100dvh - 40px); }
+  .nav-links.open { max-height: calc(100dvh - 90px); }
+  @media (min-width: 621px) { .learning-video-frame .real-video { max-height: calc(100dvh - 230px); } }
+  @media (min-width: 901px) { .syllabus-scroll { max-height: calc(100dvh - 190px); } }
+  @media (max-width: 640px) { .cover-crop-modal { max-height: 94dvh; } }
+}
+
+/* 2. Primitivas táctiles (teléfono y tableta vertical, o cualquier pantalla táctil). */
+@media (max-width: 900px), (pointer: coarse) {
+  .button { min-height: 44px; }
+  .icon-button, .menu-toggle, .avatar { width: 44px; height: 44px; }
+  .favorite { width: 44px; height: 44px; top: 6px; right: 6px; }
+  .brand, .learning-brand { min-height: 44px; display: inline-flex; align-items: center; }
+  .workspace-back { min-width: 44px; min-height: 44px; }
+  .workspace-sidebar button, .course-editor-tabs button, .pay-filters button, .access-chips button,
+  .status-chips button, .material-type-picker button, .cover-source-tabs button, .qz-insert-button, .access-segmented button, .segmented button, .learning-tabs button { min-height: 44px; }
+  .filter-group label { min-height: 44px; }
+  .filter-group input[type="radio"], .filter-group input[type="checkbox"] { width: 20px; height: 20px; flex: none; }
+  .promo-dot { width: 40px; height: 44px; }
+  .au-eye { width: 44px; height: 44px; right: 3px; }
+  .lp-footer li a, .learning-breadcrumb a, .au-logo { min-height: 44px; }
+  .learning-breadcrumb a { display: inline-flex; align-items: center; }
+  .learning-brand { min-width: 44px; justify-content: center; }
+  .au-back, .vf-link, .lp-area-link, .lp-topics a { min-height: 44px; display: inline-flex; align-items: center; }
+  .au-back { display: flex; }
+  .quick-create summary { min-height: 44px; display: flex; align-items: center; }
+  .sh-input, .sh-compact .sh-input { min-height: 44px; }
+  /* Enlaces dentro de una frase: se amplía el área tocable sin alterar el renglón. */
+  .text-link, .au-switch button { padding: 12px 6px; margin: -12px -6px; }
+
+  /* 16px en campos: evita el zoom automático de iOS al enfocar. */
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]):not([type="color"]),
+  select, textarea { font-size: 16px; }
+  .sh-input, .sh-compact .sh-input { font-size: 16px; }
+}
+
+/* 3. Texto mínimo legible. */
+@media (max-width: 900px), (pointer: coarse) {
+  .brand-sub, .lesson-pill, .lesson-pill-compact, .lesson-pill-title, .status-badge, .course-tag,
+  .learning-section-heading > div > span, .learning-section-kicker, .learning-tab-count, .lp-stage-label,
+  .lp-chip, .syllabus-now, .ol-count, .learning-course-title > span, .syllabus-section-title span,
+  .outline-kicker, .syllabus-lesson-copy small, .syllabus-header span, .promo-caption small, .lp-screen-ring > span,
+  .au-label small, .material-title-line > span, .qz-pill, .qz-badge, .qz-state, .qz-tag, .qz-locked-mark, .qz-locked-mark > span,
+  .learning-resource-copy small, .qz-ed-tag, .qz-ed-summary-stats dt, .qz-ed-qmeta .qz-qnum, .qz-ed-table thead th, .workspace-identity > span { font-size: max(12px, .75rem); }
+  .library-expired-note, .access-help, .sh-help, .sh-notice, .assign-policy-note, .renew-help,
+  .enrollment-row-meta, .outline-lesson-desc, .editor-help, .publish-help, .au-help, .unpublish-action p, .promo-upload > span, .materials-empty > span, .course-lesson-drawer .lesson-video-state > span, .lesson-video-state > span,
+  .lesson-materials-head p, .material-upload span, .data-row span, .lesson-video-state span, .learning-resources-head p { font-size: .875rem; }
+  .lp-teacher span { font-size: .875rem; }
+}
+
+/* 4. Cabecera: logo, tema, entrar y menú caben desde 320px (el logo se apila en dos líneas). */
+@media (max-width: 350px) {
+  .brand-name { flex-direction: column; align-items: flex-start; gap: 0; line-height: 1.05; }
+  .brand-sub { margin-top: -1px; letter-spacing: 0; }
+}
+@media (max-width: 400px) {
+  .nav { gap: 6px; }
+  .nav-actions { gap: 2px; }
+  .brand { font-size: 20px; letter-spacing: -1.1px; }
+  .nav-actions .button { padding: 0 11px; }
+  .icon-button, .menu-toggle { width: 40px; }
+  .avatar { width: 40px; height: 40px; }
+}
+
+/* 4b. Cabecera de los espacios de trabajo: «Mi aprendizaje» queda solo con el icono (sin ensanchar la barra). */
+@media (max-width: 650px) {
+  .nav-actions .workspace-back { font-size: 0; padding: 0; width: 44px; min-width: 44px; gap: 0; }
+}
+@media (max-width: 400px) {
+  .nav-actions .workspace-back { width: 40px; min-width: 40px; }
+}
+
+/* 4c. Checkout: los métodos de pago se apilan cuando no caben dos columnas. */
+@media (max-width: 480px) {
+  .payment-methods { grid-template-columns: minmax(0, 1fr); }
+  .payment-method { min-width: 0; }
+  .payment-method > div { min-width: 0; overflow-wrap: anywhere; }
+}
+
+/* 4d. Filas de datos con selector (responsables de curso): el selector nunca excede la tarjeta. */
+.data-row > select, .data-row select.select { max-width: 100%; min-width: 0; }
+@media (max-width: 760px) {
+  .data-row > select, .data-row select.select { width: 100%; }
+}
+
+/* 5. Toasts: ancho completo con margen y respetando la barra de gestos. */
+@media (max-width: 640px) {
+  .toast { left: 16px; right: 16px; max-width: none; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); }
+}
+
+/* 6. /explorar: los filtros colapsan en un panel con botón «Filtros». */
+.filters-toggle, .filters-apply { display: none; }
+@media (max-width: 920px) {
+  .results-bar { gap: 12px; }
+  .filters-toggle { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border: 1px solid var(--line); border-radius: 12px; color: var(--text); background: var(--surface); font-weight: 800; }
+  .filters-toggle[aria-expanded="true"] { color: var(--primary); border-color: var(--primary); }
+  .filters-toggle-count { min-width: 20px; height: 20px; display: inline-grid; place-items: center; padding: 0 6px; border-radius: 999px; color: #fff; background: var(--primary); font-size: .75rem; }
+  .filters { display: none; }
+  /* Panel inferior (bottom sheet): se abre sobre el listado y se cierra con «Ver N cursos». */
+  .filters.is-open { display: grid; gap: 12px; position: fixed; z-index: 45; left: 0; right: 0; bottom: 0; max-height: 82vh; max-height: 82dvh; overflow-y: auto; overscroll-behavior: contain; margin: 0; padding: 18px 16px calc(16px + env(safe-area-inset-bottom, 0px)); border-radius: 18px 18px 0 0; box-shadow: 0 0 0 100vmax rgb(16 24 40 / 52%); }
+  .filters.is-open h3 { display: block; margin: 0; }
+  .filters.is-open .filter-group { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 10px; min-width: 0; padding-top: 12px; margin: 0; border-top: 1px solid var(--line); }
+  .filters.is-open .filter-group > strong { grid-column: 1 / -1; }
+  .filters.is-open .filter-group label { display: flex; margin: 0; min-width: 0; overflow-wrap: anywhere; }
+  .filters-apply { display: inline-flex; position: sticky; bottom: 0; width: 100%; }
+  .explore-layout { gap: 14px; }
+}
+@media (max-width: 340px) {
+  .filters.is-open .filter-group { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* 7. Paneles de administración y docencia. */
+@media (max-width: 640px) {
+  .pay-admin .section-heading, .workspace-card .section-heading { flex-direction: column; align-items: stretch; gap: 12px; }
+  .pay-admin .section-heading .button { width: 100%; }
+  .data-row.clickable { flex-direction: row; align-items: center; justify-content: space-between; gap: 12px; min-height: 56px; }
+  .data-row.clickable > div { min-width: 0; overflow-wrap: anywhere; }
+  .data-row.clickable > svg { flex: none; }
+}
+@media (max-width: 480px) {
+  .enrollment-row-actions { flex-direction: column; align-items: stretch; }
+  .enrollment-row-actions > *, .renew-select { width: 100%; }
+  .renew-select select { min-height: 44px; }
+}
+
+/* 8. Reproductor: el marcador de «sin video» no ocupa media pantalla en teléfono. */
+@media (max-width: 900px) {
+  .learning-video-frame .video-placeholder { min-height: 0; aspect-ratio: 16 / 9; padding: 16px 20px; text-align: center; }
+  .video-placeholder span { max-width: 100%; overflow-wrap: anywhere; }
+}
+@media (max-width: 400px) {
+  .learning-video-frame .video-placeholder { min-height: 220px; aspect-ratio: auto; }
+}
+
+/* 9. Modales y drawers: caben en la pantalla, scrollean por dentro y respetan safe-area. */
+@media (max-width: 640px) {
+  .course-lesson-drawer-backdrop { justify-items: stretch; }
+  .course-lesson-drawer { width: 100%; max-width: none; padding: 18px 16px calc(24px + env(safe-area-inset-bottom, 0px)); overscroll-behavior: contain; }
+  .course-lesson-drawer > .section-heading { position: sticky; top: -18px; z-index: 2; margin: -18px -16px 0; padding: 14px 16px 10px; background: var(--surface); border-bottom: 1px solid var(--line); }
+  .confirm-backdrop { align-items: end; padding: 0; }
+  .confirm-dialog { width: 100%; max-height: 92dvh; border-radius: 18px 18px 0 0; padding: 18px 16px calc(18px + env(safe-area-inset-bottom, 0px)); overscroll-behavior: contain; }
+  .cover-crop-modal { padding-bottom: calc(18px + env(safe-area-inset-bottom, 0px)); overscroll-behavior: contain; }
+  .confirm-close { width: 44px; height: 44px; }
+  /* Editor de evaluación: la cabecera fija no ocupa media pantalla (título a 2 líneas como máximo). */
+  .qz-ed > .section-heading { align-items: flex-start; }
+  .qz-ed > .section-heading h2 { font-size: 1.1rem; line-height: 1.25; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden; }
+}
+
+/* 10. Detalle de usuario (administración): al abrirlo en móvil se hace scroll hasta él sin quedar bajo la cabecera. */
+#user-detail { scroll-margin-top: 82px; }

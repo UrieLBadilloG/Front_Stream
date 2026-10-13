@@ -1,0 +1,36 @@
+/* Programa del curso: contraer/desplegar secciones y mover clases (prefijo ol-). */
+.ol-toolbar { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
+.ol-toolbar-button { min-height: 40px; padding: 8px 14px; font-size: .9rem; }
+.ol-toolbar-button:disabled, .ol-move-trigger:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+
+.ol-title-row { display: flex; align-items: flex-start; gap: 8px; min-width: 0; cursor: pointer; }
+.ol-title-text { min-width: 0; flex: 1 1 auto; }
+.ol-kicker-row { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; }
+.ol-count { display: inline-flex; align-items: center; padding: 2px 9px; border-radius: 999px; background: color-mix(in srgb, var(--primary) 14%, var(--surface)); color: var(--primary); font-size: .74rem; font-weight: 800; white-space: nowrap; }
+.ol-toggle { flex: none; width: 40px; height: 40px; margin: -4px 0 -4px -6px; display: grid; place-items: center; border: 0; border-radius: 10px; background: transparent; color: var(--muted); }
+.ol-toggle:hover { color: var(--primary); background: color-mix(in srgb, var(--primary) 10%, var(--surface)); }
+.ol-toggle:focus-visible, .ol-move-option:focus-visible, .ol-toolbar-button:focus-visible, .ol-move-trigger:focus-visible { outline: 3px solid var(--primary); outline-offset: 2px; }
+.ol-chevron { transition: transform .25s ease; }
+.ol-toggle[aria-expanded='false'] .ol-chevron { transform: rotate(-90deg); }
+
+/* Altura animada sin medir: la fila de la rejilla pasa de 1fr a 0fr. */
+.ol-body { display: grid; grid-template-rows: 1fr; transition: grid-template-rows .25s ease; }
+.ol-body-inner { min-height: 0; overflow: hidden; visibility: visible; transition: visibility 0s; }
+.ol-body.is-collapsed { grid-template-rows: 0fr; }
+.ol-body.is-collapsed .ol-body-inner { visibility: hidden; transition: visibility 0s .25s; }
+
+.ol-move-trigger { min-height: 40px; white-space: nowrap; }
+.ol-move-dialog { width: min(100%, 460px); }
+.ol-move-list { display: grid; gap: 8px; margin: 14px 0 0; padding: 0; list-style: none; }
+.ol-move-option { width: 100%; display: grid; gap: 2px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface-soft); color: var(--text); text-align: left; min-height: 48px; }
+.ol-move-option:hover { border-color: var(--primary); background: color-mix(in srgb, var(--primary) 10%, var(--surface)); }
+.ol-move-option-title { font-weight: 700; overflow-wrap: anywhere; }
+.ol-move-option small { color: var(--muted); }
+
+@media (max-width: 700px) {
+  .ol-toolbar { justify-content: stretch; }
+  .ol-toolbar-button { flex: 1 1 140px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ol-body, .ol-chevron, .ol-body-inner, .ol-body.is-collapsed .ol-body-inner { transition: none; }
+}

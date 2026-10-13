@@ -1,0 +1,189 @@
+/* Verificación pública de constancias (prefijo vf-) y panel "Añadir a LinkedIn" (prefijo li-). */
+
+/* ---------- Verificación ---------- */
+.vf-page { flex: 1 0 auto; padding: 40px 0 72px; background: radial-gradient(circle at 88% 0%, color-mix(in srgb, var(--primary) 9%, transparent), transparent 36%), var(--bg); overflow-x: clip; }
+.vf-wrap { width: min(760px, calc(100% - 32px)); margin: 0 auto; }
+.vf-card { display: grid; gap: 16px; min-width: 0; padding: clamp(20px, 4vw, 36px); border: 1px solid var(--line); border-radius: 24px; background: var(--surface); color: var(--text); box-shadow: var(--shadow); }
+.vf-kicker { margin: 0; font-size: .8rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.vf-title { margin: 0; font-size: clamp(1.4rem, 4vw, 1.9rem); line-height: 1.2; letter-spacing: -.6px; overflow-wrap: anywhere; }
+.vf-text { margin: 0; color: var(--muted); line-height: 1.55; }
+.vf-sr, .li-sr { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+.vf-form { display: grid; gap: 8px; }
+.vf-form label { font-weight: 800; font-size: .9rem; }
+.vf-form-row { display: flex; flex-wrap: wrap; gap: 10px; }
+.vf-form-row input { flex: 1 1 200px; min-width: 0; min-height: 46px; padding: 0 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface-soft); color: var(--text); font-size: 1rem; letter-spacing: .04em; }
+.vf-form-row input:focus-visible { outline: 3px solid var(--primary); outline-offset: 1px; border-color: var(--primary); }
+.vf-form-row .button { min-height: 46px; }
+.vf-error { margin: 0; color: var(--danger); font-size: .88rem; font-weight: 700; }
+.vf-link { justify-self: start; color: var(--primary); font-weight: 800; text-decoration: underline; text-underline-offset: 3px; }
+.vf-link:focus-visible, .vf-copy:focus-visible { outline: 3px solid var(--primary); outline-offset: 2px; border-radius: 6px; }
+
+.vf-valid { gap: 20px; }
+.vf-seal { display: inline-flex; align-items: center; gap: 8px; justify-self: start; padding: 8px 14px; border-radius: 999px; color: var(--ok); background: var(--ok-soft); font-weight: 800; }
+.vf-main { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.vf-who { min-width: 0; display: grid; gap: 6px; }
+.vf-name { margin: 0; font-size: clamp(1.5rem, 5vw, 2.3rem); line-height: 1.12; letter-spacing: -.8px; overflow-wrap: anywhere; }
+.vf-course { margin: 0; color: var(--muted); line-height: 1.5; overflow-wrap: anywhere; }
+.vf-course strong { color: var(--text); }
+.vf-badge { flex: none; width: 150px; height: 150px; object-fit: contain; border-radius: 16px; background: #fff; border: 1px solid var(--line); }
+.vf-details { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 0; }
+.vf-detail { min-width: 0; padding: 12px 14px; border-radius: 14px; background: var(--surface-soft); }
+.vf-detail dt { font-size: .76rem; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
+.vf-detail dd { margin: 4px 0 0; font-weight: 700; overflow-wrap: anywhere; }
+.vf-code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; letter-spacing: .03em; }
+.vf-copy { display: inline-flex; align-items: center; gap: 5px; margin-left: 6px; padding: 4px 9px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--text); font-size: .8rem; font-weight: 700; }
+.vf-copy:hover { border-color: var(--primary); color: var(--primary); }
+
+.vf-invalid { justify-items: start; }
+.vf-icon { width: 52px; height: 52px; display: grid; place-items: center; border-radius: 16px; color: var(--danger); background: var(--danger-soft); }
+.vf-invalid .vf-form { width: 100%; }
+
+.vf-skeleton { display: grid; gap: 14px; }
+.vf-skeleton i { display: block; height: 18px; border-radius: 99px; background: linear-gradient(90deg, var(--surface-soft), var(--line), var(--surface-soft)); background-size: 200% 100%; animation: vf-shimmer 1.4s linear infinite; }
+.vf-skeleton i:nth-child(1) { width: 42%; height: 28px; }
+.vf-skeleton i:nth-child(2) { width: 78%; height: 34px; }
+.vf-skeleton i:nth-child(3) { width: 60%; }
+.vf-skeleton i:nth-child(4) { width: 90%; height: 64px; border-radius: 14px; }
+@keyframes vf-shimmer { to { background-position: -200% 0; } }
+
+@media (max-width: 560px) {
+  .vf-page { padding: 24px 0 48px; }
+  .vf-main { flex-direction: column-reverse; align-items: flex-start; }
+  .vf-badge { width: 120px; height: 120px; }
+  .vf-details { grid-template-columns: minmax(0, 1fr); }
+  .vf-form-row .button { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .vf-skeleton i { animation: none; }
+}
+
+/* ---------- Añadir a LinkedIn ---------- */
+.li-share { display: grid; gap: 8px; padding-top: 10px; border-top: 1px solid var(--line); }
+.li-button { min-height: 44px; width: max-content; max-width: 100%; justify-content: center; text-align: center; }
+.li-primary { border-color: #0a66c2; color: #0a66c2; font-weight: 800; }
+.li-button:focus-visible, .li-details summary:focus-visible, .li-icon-button:focus-visible { outline: 3px solid var(--primary); outline-offset: 2px; }
+.li-button:disabled { opacity: .65; cursor: not-allowed; }
+.li-details { border: 1px solid var(--line); border-radius: 12px; padding: 0 12px; background: var(--surface); }
+.li-details summary { min-height: 44px; display: flex; align-items: center; cursor: pointer; font-weight: 800; font-size: .9rem; border-radius: 8px; }
+.li-details[open] summary { border-bottom: 1px solid var(--line); margin-bottom: 10px; }
+.li-fields { display: grid; gap: 10px; }
+.li-field { display: grid; gap: 4px; min-width: 0; }
+.li-field label { font-size: .78rem; font-weight: 800; color: var(--muted); }
+.li-field-row { display: flex; gap: 6px; }
+.li-field-row input { flex: 1; min-width: 0; min-height: 40px; padding: 0 10px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface-soft); color: var(--text); font-size: .85rem; text-overflow: ellipsis; }
+.li-field-row input:focus-visible { outline: 3px solid var(--primary); outline-offset: 1px; }
+.li-icon-button { flex: none; width: 40px; height: 40px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--text); }
+.li-icon-button:hover { border-color: var(--primary); color: var(--primary); }
+.li-note { margin: 12px 0; font-size: .82rem; line-height: 1.5; color: var(--muted); }
+
+/* El reproductor siempre es oscuro. */
+.cert-player .li-share, .cert-player .li-details, .cert-player .li-details[open] summary { border-color: #302a3c; }
+.cert-player .li-primary { color: #7fb9ff; border-color: #3b6fb0; }
+.cert-player .li-details { background: #1b1626; }
+.cert-player .li-field label, .cert-player .li-note { color: #b8b0c8; }
+.cert-player .li-field-row input { background: #241e31; border-color: #4a4259; color: #eae5f4; }
+.cert-player .li-icon-button { background: #241e31; border-color: #4a4259; color: #eae5f4; }
+.cert-player .li-button:focus-visible, .cert-player .li-details summary:focus-visible, .cert-player .li-icon-button:focus-visible { outline-color: #d4caff; }
+
+.cert-card .li-button { width: 100%; }
+@media (max-width: 480px) {
+  .li-button { width: 100%; }
+}
+
+/* ---------- Compartir tu logro (prefijo sa-) ---------- */
+.sa-share { display: grid; gap: 8px; min-width: 0; padding-top: 10px; border-top: 1px solid var(--line); }
+.sa-compact { justify-items: start; }
+.sa-title { margin: 0; font-size: .9rem; font-weight: 800; }
+.button.sa-facebook { min-height: 44px; justify-content: center; gap: 8px; border: 1px solid #1565d8; background: #1565d8; color: #fff; font-weight: 800; }
+.button.sa-facebook:hover { border-color: #0f4fb0; background: #0f4fb0; color: #fff; }
+.button.sa-linkedin { min-height: 44px; justify-content: center; gap: 8px; border: 1px solid #0a66c2; background: #0a66c2; color: #fff; font-weight: 800; }
+.button.sa-linkedin:hover { border-color: #084d92; background: #084d92; color: #fff; }
+.button.sa-instagram { min-height: 44px; justify-content: center; gap: 8px; border: 0; background: linear-gradient(45deg, #f09433 0%, #dc2743 45%, #bc1888 100%); color: #fff; font-weight: 800; }
+.button.sa-instagram:hover { filter: brightness(.92); color: #fff; }
+.button.sa-instagram:disabled { opacity: .65; cursor: not-allowed; filter: none; }
+.sa-linkedin:focus-visible, .sa-instagram:focus-visible { outline: 3px solid var(--primary); outline-offset: 2px; }
+.cert-player .sa-linkedin:focus-visible, .cert-player .sa-instagram:focus-visible { outline-color: #d4caff; }
+.sa-button { min-height: 44px; justify-content: center; gap: 6px; }
+.sa-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.sa-chip { flex: 1 1 0; min-width: 44px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; padding: 0 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); color: var(--text); font-size: .88rem; font-weight: 800; text-decoration: none; }
+.sa-chip:hover { border-color: var(--primary); color: var(--primary); }
+.sa-facebook:focus-visible, .sa-button:focus-visible, .sa-chip:focus-visible { outline: 3px solid var(--primary); outline-offset: 2px; }
+.sa-button:disabled { opacity: .65; cursor: not-allowed; }
+.sa-note { margin: 0; font-size: .8rem; line-height: 1.5; color: var(--muted); overflow-wrap: anywhere; }
+.sa-fail { color: var(--danger); font-weight: 700; }
+.sa-sr { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+/* El reproductor siempre es oscuro. */
+.cert-player .sa-share { border-color: #302a3c; }
+.cert-player .sa-chip { background: #241e31; border-color: #4a4259; color: #eae5f4; }
+.cert-player .sa-chip:hover { border-color: #d4caff; color: #d4caff; }
+.cert-player .sa-note { color: #b8b0c8; }
+.cert-player .sa-fail { color: #ffb0b8; }
+.cert-player .sa-facebook:focus-visible, .cert-player .sa-button:focus-visible, .cert-player .sa-chip:focus-visible { outline-color: #d4caff; }
+@media (max-width: 480px) {
+  .sa-share .button { width: 100%; }
+}
+
+/* ---------- Compartir curso (prefijo sh-) ---------- */
+.sh-block { display: grid; gap: 10px; min-width: 0; margin-top: 14px; padding: 16px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); color: var(--text); }
+.sh-block.sh-editor { margin-top: 18px; }
+.sh-block.sh-compact { margin-top: 12px; padding: 12px; border-radius: 12px; background: var(--surface-soft); }
+.sh-title { display: flex; align-items: center; gap: 8px; margin: 0; font-size: 1rem; line-height: 1.3; }
+.sh-subtitle { margin: 4px 0 0; font-size: .92rem; }
+.sh-help { margin: 0; color: var(--muted); font-size: .85rem; line-height: 1.5; }
+.sh-notice { margin: 0; padding: 8px 12px; border: 1px solid var(--line); border-radius: 10px; color: var(--text); background: var(--surface-soft); font-size: .84rem; font-weight: 700; line-height: 1.45; }
+.sh-compact .sh-notice { background: var(--surface); }
+.sh-row { display: grid; gap: 4px; min-width: 0; }
+.sh-label { font-size: .78rem; font-weight: 800; color: var(--muted); }
+.sh-field { display: flex; flex-wrap: wrap; gap: 8px; min-width: 0; }
+.sh-input { flex: 1 1 200px; min-width: 0; min-height: 42px; padding: 0 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--text); font-size: .88rem; text-overflow: ellipsis; }
+.sh-compact .sh-input { min-height: 38px; font-size: .82rem; }
+.sh-input:focus-visible { outline: 3px solid var(--primary); outline-offset: 1px; border-color: var(--primary); }
+.sh-copy, .sh-action { min-height: 42px; justify-content: center; gap: 6px; }
+.sh-compact .sh-copy, .sh-compact .sh-action { min-height: 38px; font-size: .84rem; }
+.sh-copy:focus-visible, .sh-action:focus-visible { outline: 3px solid var(--primary); outline-offset: 2px; }
+.sh-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.sh-preview { display: grid; gap: 8px; margin-top: 4px; padding-top: 12px; border-top: 1px solid var(--line); }
+.sh-live { min-height: 1.2em; margin: 0; color: var(--ok); font-size: .84rem; font-weight: 700; }
+.sh-live:empty { min-height: 0; }
+.sh-sr { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.teacher-course-card-body .sh-block { margin-top: 12px; }
+@media (max-width: 480px) {
+  .sh-copy, .sh-action { width: 100%; }
+  .sh-block { padding: 14px; }
+}
+
+/* ---------- Página pública del curso (prefijo cp-) ---------- */
+.cp-hero .detail-info { display: flex; flex-wrap: wrap; gap: 8px 16px; }
+.cp-hero .detail-info span { display: inline-flex; align-items: center; gap: 6px; }
+.cp-card { min-width: 0; }
+.cp-card img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block; }
+.cp-cta { width: 100%; justify-content: center; min-height: 48px; }
+.cp-cta:focus-visible, .cp-secondary .button:focus-visible { outline: 3px solid var(--primary); outline-offset: 2px; }
+.cp-secondary { display: grid; gap: 8px; margin-top: 10px; }
+.cp-secondary .button { width: 100%; justify-content: center; }
+.cp-muted { margin: 0 0 8px; color: var(--muted); }
+.cp-description { margin: 0; color: var(--muted); line-height: 1.7; white-space: pre-line; overflow-wrap: anywhere; }
+.cp-section { margin-top: 18px; }
+.cp-section-title { margin: 0 0 6px; font-size: 1rem; }
+.cp-section-desc { font-size: .88rem; }
+.cp-lesson { gap: 12px; }
+.cp-lesson strong { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; min-width: 0; overflow-wrap: anywhere; }
+.cp-lesson > span { flex: none; }
+.cp-empty { display: grid; justify-items: center; gap: 12px; padding: 48px 20px; text-align: center; }
+.cp-empty h1 { margin: 0; font-size: clamp(1.3rem, 4vw, 1.8rem); }
+.cp-empty p { margin: 0; max-width: 46ch; color: var(--muted); }
+.cp-empty-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+.cp-hero h1, .cp-hero p { overflow-wrap: anywhere; }
+@media (max-width: 900px) {
+  .cp-hero .detail-hero-grid { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+}
+
+/* Banner promocional vertical: se ve completo, con su botón de compra real debajo. */
+.cp-banner { display: grid; justify-items: center; gap: 14px; margin-bottom: 21px; }
+.cp-banner img { display: block; width: 100%; max-width: 500px; height: auto; border: 1px solid var(--line); border-radius: 18px; background: var(--surface-soft); box-shadow: 0 14px 38px rgb(20 12 50 / 22%); }
+.cp-banner-cta { width: 100%; max-width: 500px; }
+@media (max-width: 650px) {
+  .cp-banner { margin-inline: 2px; }
+  .cp-banner img { border-radius: 14px; }
+}
